@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://api.github.com; base-uri 'none'; form-action 'none'">
+  <title>Projects admin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <h1 style="margin-top:32px">Projects admin</h1>
+
+    <div class="card" id="tokenBox">
+      <div id="tokenNew">
+        <label for="tok">GitHub fine-grained token (one repo, Contents read/write)</label>
+        <input id="tok" type="password" autocomplete="off" placeholder="github_pat_...">
+        <div class="bar"><button class="primary" id="saveTok">Save token and load</button></div>
+      </div>
+      <div id="tokenHave" hidden>
+        <span class="hint">A token is stored on this device only.</span>
+        <div class="bar">
+          <button id="reload">Reload from GitHub</button>
+          <button class="danger" id="forget">Forget token</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="status" role="status">Paste your token to start.</div>
+    <div id="editor"></div>
+    <div class="bar" id="saveBar" hidden>
+      <button class="primary" id="save" disabled>Save to GitHub</button>
+      <span class="hint">The public site updates about a minute after saving.</span>
+    </div>
+    <p class="hint" style="padding-bottom:48px"></p>
+  </div>
+  <script src="admin.js"></script>
+</body>
+</html>
