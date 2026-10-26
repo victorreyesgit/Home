@@ -1,6 +1,6 @@
 // ===== Settings: change these if your repo differs =====
 var OWNER  = "victorreyesgit";
-var REPO   = "victorreyesgit.github.io";
+var REPO   = "Home";
 var BRANCH = "main";
 var FILE   = "projects.js";
 // =======================================================
@@ -54,6 +54,7 @@ async function load() {
     var parsed;
     try { parsed = JSON.parse(txt.slice(a, b + 1)); }
     catch (e) { throw new Error(FILE + " is not valid JSON (check quotes and trailing commas). Fix it on github.com, then reload. " + e.message); }
+    parsed.site = parsed.site || { title: "Programming Projects", description: "" };
     parsed.sections = parsed.sections || [];
     parsed.sections.forEach(function (s) { s.projects = s.projects || []; });
     data = parsed; sha = j.sha; prefix = txt.slice(0, m.index);
@@ -63,10 +64,11 @@ async function load() {
 }
 
 function clean() {
-  var out = { sections: data.sections.map(function (s) {
-    return { id: s.id, title: s.title, description: s.description || "",
+  var out = { site: { title: data.site.title || "Programming Projects", description: data.site.description || "" },
+    sections: data.sections.map(function (s) {
+    return { id: s.id, title: s.title, description: s.description || "", visible: s.visible !== false,
       projects: s.projects.map(function (p) {
-        var o = { title: p.title, description: p.description || "", url: p.url || "" };
+        var o = { title: p.title, description: p.description || "", url: p.url || "", visible: p.visible !== false };
         if (p.repo) o.repo = p.repo;
         if (p.tags && p.tags.length) o.tags = p.tags;
         return o;
@@ -104,6 +106,11 @@ function field(label, value, set, multi) {
   i.oninput = function () { set(i.value); setDirty(true); };
   w.append(l, i); return w;
 }
+function check(label, value, set) {
+  var l = el("label", "chk"), i = el("input"); i.type = "checkbox"; i.checked = value;
+  i.onchange = function () { set(i.checked); setDirty(true); render(); };
+  l.append(i, document.createTextNode(label)); return l;
+}
 function move(arr, i, d) {
   var j = i + d; if (j < 0 || j >= arr.length) return;
   var t = arr[i]; arr[i] = arr[j]; arr[j] = t; setDirty(true); render();
@@ -116,12 +123,17 @@ function slug(t) {
 
 function render() {
   var box = $("editor"); box.textContent = "";
+  var sc = el("div", "card");
+  sc.append(field("Site name", data.site.title, function (v) { data.site.title = v; }),
+    field("Site short description", data.site.description, function (v) { data.site.description = v; }, true));
+  box.append(sc);
   data.sections.forEach(function (s, si) {
     var c = el("div", "card");
     c.append(
-      field("Section title", s.title, function (v) { s.title = v; }),
+      field("Section name", s.title, function (v) { s.title = v; }),
       field("Section id (used in page links)", s.id, function (v) { s.id = v.trim(); }),
-      field("Section description", s.description, function (v) { s.description = v; }, true));
+      field("Short description", s.description, function (v) { s.description = v; }, true),
+      check("Visible on the site", s.visible !== false, function (v) { s.visible = v; }));
     var bar = el("div", "bar");
     bar.append(
       btn("↑ Up", function () { move(data.sections, si, -1); }),
@@ -134,13 +146,15 @@ function render() {
 
     s.projects.forEach(function (p, pi) {
       var pc = el("div", "card");
+      if (p.visible === false) pc.style.opacity = ".6";
       pc.append(
-        field("Project title", p.title, function (v) { p.title = v; }),
-        field("Description", p.description, function (v) { p.description = v; }, true),
+        field("Name", p.title, function (v) { p.title = v; }),
+        field("Short description", p.description, function (v) { p.description = v; }, true),
         field("Live URL (https://…)", p.url, function (v) { p.url = v.trim(); }),
         field("Source repo URL (optional)", p.repo, function (v) { p.repo = v.trim(); }),
         field("Tags (comma separated, optional)", (p.tags || []).join(", "), function (v) {
-          p.tags = v.split(",").map(function (t) { return t.trim(); }).filter(Boolean); }));
+          p.tags = v.split(",").map(function (t) { return t.trim(); }).filter(Boolean); }),
+        check("Visible on the site", p.visible !== false, function (v) { p.visible = v; }));
       var sel = el("select");
       data.sections.forEach(function (o, oi) {
         var op = el("option", "", o.title || o.id); op.value = oi; if (oi === si) op.selected = true; sel.append(op);

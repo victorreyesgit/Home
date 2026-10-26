@@ -1,4 +1,4 @@
-# Victor Reyes: Projects hub
+# Programming Projects hub
 
 A static page (plain HTML/CSS/JS, no build step) that lists your projects by section.
 All content lives in `projects.js`. Opening `index.html` by double-click works.
@@ -9,11 +9,11 @@ All content lives in `projects.js`. Opening `index.html` by double-click works.
 - `admin.html`, `admin.js`: private editing page (not linked from the site)
 
 ## 1. Upload and publish (GitHub Pages)
-1. Your repo is `victorreyesgit.github.io`. If it already exists, back up what is in it; this site replaces its `index.html` and `style.css`.
+1. Your repo is `Home`. If it already exists, back up what is in it; the new `index.html` and `style.css` replace any with the same name.
 2. On github.com open the repo, **Add file → Upload files**, drag in all files from this zip, then **Commit changes** (branch `main`).
 3. **Settings → Pages**: Source = **Deploy from a branch**, branch `main`, folder `/ (root)`. Save.
-4. After about a minute the site is at `https://victorreyesgit.github.io/`.
-   The admin page is at `https://victorreyesgit.github.io/admin.html` (bookmark it; nothing links to it).
+4. After about a minute the site is at `https://victorreyesgit.github.io/Home/`.
+   The admin page is at `https://victorreyesgit.github.io/Home/admin.html` (bookmark it; nothing links to it).
 
 Cloudflare Pages also works (connect the repo, no build command, output directory `/`). The admin settings in `admin.js` still point to the GitHub repo.
 
@@ -23,7 +23,7 @@ Cloudflare Pages also works (connect the repo, no build command, output director
 3. **Generate new token**. Name: `projects-hub-admin`.
 4. **Expiration**: pick a short one (30 or 90 days). Avoid "no expiration".
 5. **Resource owner**: `victorreyesgit`.
-6. **Repository access → Only select repositories** → choose `victorreyesgit.github.io`.
+6. **Repository access → Only select repositories** → choose `Home`.
 7. **Permissions → Repository permissions → Contents: Read and write**. Leave everything else as "No access" (Metadata read-only is added automatically).
 8. **Generate token** and copy it (starts with `github_pat_`). GitHub shows it only once.
 
@@ -38,7 +38,7 @@ Cloudflare Pages also works (connect the repo, no build command, output director
 
 ## 4. Edit `projects.js` by hand
 Open `projects.js` on github.com, click the pencil, edit, **Commit changes**. The comment at the top has a copy-paste example. Rules: valid JSON inside the braces (double quotes, no trailing commas, no comments inside) and keep the line `window.PROJECTS = {`. The admin page needs this to read the file; if it is broken, the admin tells you.
-Sections with no projects are hidden on the public page.
+Sections with no visible projects are hidden. Set `"visible": false` on a section or project to hide it without deleting it.
 
 ## Security trade-offs of keeping the token in the browser (honest version)
 - The token sits in `localStorage` unencrypted. Anyone with access to your unlocked browser profile, or any script running on the same origin, can read it.
