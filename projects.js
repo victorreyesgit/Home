@@ -65,15 +65,9 @@ window.PROJECTS = {
           "visible": true
         },
         {
-          "title": "Jet d'Eau visualisation",
-          "description": "",
+          "title": "Jet d'Eau",
+          "description": "Playground based on the Jet d'Eau in Geneva, you can explore the height difference depending on variables as liters of water, power used...",
           "url": "https://victorreyesgit.github.io/Jet-d-eau/",
-          "visible": true
-        },
-        {
-          "title": "New project",
-          "description": "",
-          "url": "",
           "visible": true
         }
       ]
