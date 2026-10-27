@@ -63,6 +63,18 @@ window.PROJECTS = {
           "description": "Visualisation to explain the phases of the moon and predicting the hour for moonrise and moonset",
           "url": "https://victorreyesgit.github.io/Orbital/",
           "visible": true
+        },
+        {
+          "title": "Jet d'Eau visualisation",
+          "description": "",
+          "url": "https://victorreyesgit.github.io/Jet-d-eau/",
+          "visible": true
+        },
+        {
+          "title": "New project",
+          "description": "",
+          "url": "",
+          "visible": true
         }
       ]
     },
@@ -85,7 +97,14 @@ window.PROJECTS = {
       "title": "Cute Webpages",
       "description": "Webpages more to show than day to day useful",
       "visible": true,
-      "projects": []
+      "projects": [
+        {
+          "title": "Special Dates",
+          "description": "It searches for \"day-versaries\" e.g. when you will be 10000 days old",
+          "url": "https://victorreyesgit.github.io/Special_Dates/",
+          "visible": true
+        }
+      ]
     },
     {
       "id": "invisible",
