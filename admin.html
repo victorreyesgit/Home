@@ -8,10 +8,10 @@
   <title>Projects admin</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <div class="wrap">
-    <h1 class="adm">Projects admin</h1>
-
+<body class="admin">
+  <header class="top">
+    <a class="admin-link" href="index.html">← View site</a>
+    <p class="mode">Editing mode: click any text to edit it, drag ⠿ to reorder.</p>
     <div class="card" id="tokenBox">
       <div id="tokenNew">
         <label for="tok">GitHub fine-grained token (one repo, Contents read/write)</label>
@@ -26,14 +26,16 @@
         </div>
       </div>
     </div>
+  </header>
 
-    <div id="status" role="status">Paste your token to start.</div>
-    <div id="editor"></div>
-    <div class="bar" id="saveBar" hidden>
+  <div id="status" role="status">Paste your token to start.</div>
+  <main id="editor"></main>
+
+  <div class="savebar" id="saveBar" hidden>
+    <div class="savebar-in">
       <button class="primary" id="save" disabled>Save to GitHub</button>
       <span class="hint">The public site updates about a minute after saving.</span>
     </div>
-    <p class="hint pad"></p>
   </div>
   <script src="admin.js"></script>
 </body>

@@ -6,14 +6,14 @@ All content lives in `projects.js`. Opening `index.html` by double-click works.
 ## Files
 - `index.html`, `style.css`, `script.js`: the public page
 - `projects.js`: all content (sections and projects)
-- `admin.html`, `admin.js`: private editing page (not linked from the site)
+- `admin.html`, `admin.js`: editing page, opened from the **⚙ Admin** button at the top right of the site (it needs your token to do anything)
 
 ## 1. Upload and publish (GitHub Pages)
 1. Your repo is `Home`. If it already exists, back up what is in it; the new `index.html` and `style.css` replace any with the same name.
 2. On github.com open the repo, **Add file → Upload files**, drag in all files from this zip, then **Commit changes** (branch `main`).
 3. **Settings → Pages**: Source = **Deploy from a branch**, branch `main`, folder `/ (root)`. Save.
 4. After about a minute the site is at `https://victorreyesgit.github.io/Home/`.
-   The admin page is at `https://victorreyesgit.github.io/Home/admin.html` (bookmark it; nothing links to it).
+   The admin page is at `https://victorreyesgit.github.io/Home/admin.html` (also reachable from the **⚙ Admin** button on the site).
 
 Cloudflare Pages also works (connect the repo, no build command, output directory `/`). The admin settings in `admin.js` still point to the GitHub repo.
 
@@ -29,7 +29,9 @@ Cloudflare Pages also works (connect the repo, no build command, output director
 
 ## 3. Use the admin page
 1. Open `admin.html`, paste the token, click **Save token and load**.
-2. Edit: add, rename, delete and reorder sections (↑ ↓); add, edit, delete and reorder projects; use **Move to section** to move a project.
+2. The page looks like the public site. Click any text (site name, section names, project names, descriptions, tags, URLs) and type to edit it in place.
+   - **Reorder:** drag the **⠿** handle of a section or project and drop it where the purple line appears. Projects can be dragged into other sections (including empty ones). On touch screens, where dragging does not work, use the **↑ ↓** buttons.
+   - **Hide / Show** keeps an item but removes it from the public site; **Delete** removes it; the dropdown on each project also moves it to another section.
 3. Click **Save to GitHub**. A green message confirms the commit; the site updates in about a minute.
 4. If you see "changed on GitHub since you loaded it", someone (you, by hand) edited the file meanwhile: click **Reload from GitHub** and redo the edit. Nothing is overwritten.
 5. **Forget token** removes it from that device. Do this on shared computers.
