@@ -77,7 +77,20 @@ window.PROJECTS = {
       "title": "Los juegos del Abuelo ",
       "description": "Juegos para mi abuelo y para quien los quiera",
       "visible": true,
-      "projects": []
+      "projects": [
+        {
+          "title": "Mahjong",
+          "description": "",
+          "url": "https://victorreyesgit.github.io/Mahjong/",
+          "visible": true
+        },
+        {
+          "title": "Solitario",
+          "description": "",
+          "url": "https://victorreyesgit.github.io/Solitario_Klondike/",
+          "visible": true
+        }
+      ]
     },
     {
       "id": "tools",
